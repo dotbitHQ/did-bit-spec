@@ -6,7 +6,7 @@
 
 ## Summary
 
-[.bit](https://did.id) is a blockchain-based, open source, decentralized cross-chain account system that provides a worldwide unique naming system with a .bit suffix that can be used in different scenarios, such as cryptocurrency transfer, domain name resolution, identity authentication, etc.
+[.bit](https://did.id) is a [blockchain-based](https://www.nervos.org/), open source, decentralized cross-chain account system that provides a worldwide unique naming system with a .bit suffix that can be used in different scenarios, such as cryptocurrency transfer, domain name resolution, identity authentication, etc.
 
 This .bit DID method specification describes a new DID method and how to do CRUD operations on .bit DID documents.
 
@@ -16,16 +16,16 @@ This specification conforms to the requirements specified in the [DIDs specifica
 
 The name string that shall identify this DID method is: `bit`.
 
-A DID that uses this method `MUST` begin with the following prefix: `did:bit`. Per the DID specification, this string `MUST` be in lowercase. The remainder of the DID, after the prefix, is specified below.
+A DID that uses this method MUST begin with the following prefix: `did:bit`. Per the DID specification, this string MUST be in lowercase. The remainder of the DID, after the prefix, is specified below.
 
 ## DID Method-Specific Identifier
 
 .bit DID Method-Specific Identifier have the following format:
 
 ```
-DID Method-Specific Identifier	:= [:<network>]:<name>
-network							:= mainnet | pudge | ...
-name							:= <.bit-name>
+DID Method-Specific Identifier := [:<network>]:<name>
+network                        := mainnet | pudge | ...
+name                           := <.bit-name>
 ```
 
 If the network is omitted, the network defaults to mainnet, so a `did:bit:example.bit` is equivalent to `did:bit:mainnet:example.bit`. However, the canonical form is `did:bit:mainnet:example.bit`.
@@ -55,7 +55,7 @@ The following named CUSTOM records are defined for now:
 
 - `org_w3c_did_verificationMethod`
   
-  OPTIONAL. A set of [verification methods](https://www.w3.org/TR/did-core/#verification-methods) as per W3C DID Core specification. Verification method `id` property values `MUST` be relative DID URIs, e.g., `#my-key-id-1234`. 
+  OPTIONAL. A set of [verification methods](https://www.w3.org/TR/did-core/#verification-methods) as per W3C DID Core specification. Verification method `id` property values MUST be relative DID URIs. 
   
   > NOTE: the owner of the .bit name will be automatically propagated as a verification method during DID resolution.
 
@@ -67,7 +67,7 @@ The following named CUSTOM records are defined for now:
 
 ### Create
 
-See [.bit Doc](https://docs.did.id/) or [.bit official website](https://did.id) on how to register .bit names.
+See [.bit doc](https://docs.did.id/) or [.bit official website](https://did.id) on how to register .bit names.
 
 ### Read
 
@@ -80,19 +80,19 @@ The default verification method will always include the owner of the .bit name a
   "id": "<.bit-name>#<sha256-of-blockchainAccountId>",
   "type": "EcdsaSecp256k1RecoveryMethod2020",
   "controller": "<.bit-name>",
-  "blockchainAccountId": "<algId-payload>"
+  "blockchainAccountId": "<algorithmIndex-payload>"
 }
 ```
 
 - The `id` of the default verification method is the concatenation of the .bit DID followed by the `#` and the hex representation of `sha256(blockchainAccountId)`. Additional verification methods that MAY be added MUST not use that verification method `id` and will be ignored in the DID Document.
 
-- .bit's `blockchainAccountId` consists of two parts: `algorithm index` and `payload`. Now .bit supports the following algorithms:
+- .bit's `blockchainAccountId` consists of two parts: `algorithmIndex` and `payload`. Now .bit supports the following algorithms:
 
-| index | algorithm        | curve     | payload               | APP                  |
+| index | algorithm        | curve     | payload               | Scenario             |
 | ----- | ---------------- | --------- | --------------------- | -------------------- |
 | 03    | ECDSA            | secp256k1 | address               | EVM compatible chain |
 | 04    | ECDSA            | secp256k1 | hex format on address | TRON                 |
-| 05    | ECDSA ( EIP712 ) | secp256k1 | address               | EVM compatible chain |
+| 05    | ECDSA ( [EIP712](https://eips.ethereum.org/EIPS/eip-712) ) | secp256k1 | address               | EVM compatible chain |
 | 06    | EdDSA            | ed25519   | publick key           | Mixin                |
 | 07    | ECDSA            | secp256k1 | hex format on address | DOGE                 |
 | 08    | ECDSA            | secp256r1 | hash(cid)+hash(pk)    | WebAuthn             |
@@ -111,7 +111,7 @@ The default service will always include the .bit service as follows:
 }
 ```
 
-The `id` of the default service is the concatenation of the .bit DID followed by the `#Web3PublicProfile-` and the hex representation of `sha256(blockchainAccountId)`. Additional services that `MAY` be added `MUST` not use that service `id` and will be ignored in the DID Document.
+The `id` of the default service is the concatenation of the .bit DID followed by the `#Web3PublicProfile-` and the hex representation of `sha256(blockchainAccountId)`. Additional services that MAY be added MUST not use that service `id` and will be ignored in the DID Document.
 
 If the DID specific CUSTOM records are malformed, the entire CUSTOM record will be ignored in the DID resolution process.
 
