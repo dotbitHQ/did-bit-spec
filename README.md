@@ -224,13 +224,52 @@ See [related documents](https://docs.did.id/technical-details/data-container#rec
 
 When an account expires and is not renewed for a long time, it will be reclaimed by the system. Once it is reclaimed, the DID information is essentially deleted and will remain deleted until a new user registers it. More details see [related documents](https://docs.did.id/technical-details/lifecycle#account-logical-status) to know the lifecycle of a .bit name.
 
+
 ## Privacy Considerations
+
+**The data of the .bit name will be referred to as "The Data" in the following text.**
+
+### Keeping PII off-chain
+
+Regardless of encryption, The Data should not include Personally Identifiable Information (PII). The Data should contain only did, public keys, and service endpoints.
+
+### Name Tracing
 
 When any data (e.g. W3C Verifiable Credentials) is associated with .bit DIDs, sharing that data would also impose sharing the onchain data graph (e.g. transaction history, NFTs etc.) of the payload that owns the .bit name.
 
-Using personal identifiable information as DID Method specific identifiers discloses personal information every time the DID is shared with a counter party. This specification DOES NOT endorse the use of .bit names that correlate directly with real world human beings.
 
-## Security Considerations
+### Disclosure
 
-.bit names are non-fungible and transferrable. When the owner of the .bit name changes, the authorative keys will also change. This needs to be considered when used in conjunction with verifiable data where the DID is embedded, e.g., W3C Verifiable Credentials.
+The Data and its historical data are stored in the blockchain. Users should understand that on-chain data is public and does not have limitations on its use or disclosure.
+
+
+## Security considerations
+
+The .bit name's DID document contract is deployed on the Nervos BlockChain，all of the write operations MUST be signed by the private key which corresponds to the public key in the DID document.
+
+Document was protected by blockchain ledger security mechanism, so replay, eavesdropping, denial of service, man-in-the-middle，message insertion，deletion，modification attack are impossible, which can only be modified by one of the controllers who has related private key. All of the fields already been defined in document, user can insert incorrect implementation into document.
+
+We provide integrity protection and update authentication for all operations, which makes it impossible to insert, modify or delete message by attacker. Only controllers in document can modify document, which contain controller's public key.
+
+### Unsecure verifiable data registries
+
+There are a number of risks associated to the use of any unsecure verifiable data registries:
+
+- Resolver's blockchain nodes falling behind mainnet height.
+- The Nervos network became unstable causing resolvers to end up collecting incorrect data.
+- When some operations is in progress, the owner of the .bit name has changed.
+
+In such cases, the validity of transactions is not guaranteed, and denial-of-service attacks can take place, leading to dropped updates, or even the disappearance of the DIDs altogether.
+
+To mitigate that risk, it is recommended to build a resolver and perform secondary verification after a short period of time (5 minutes).
+
+## References
+
+- https://www.w3.org/TR/did-core
+- https://github.com/eg-easy/grano-did
+- https://github.com/EG-easy/grano-did-client
+- https://github.com/EG-easy/grano-did-contract
+- https://github.com/EG-easy/grano-did-exporter
+- https://github.com/EG-easy/grano-did-node
+- https://github.com/EG-easy/grano-did-resolver
 
