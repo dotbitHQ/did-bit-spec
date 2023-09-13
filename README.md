@@ -6,7 +6,7 @@
 
 ## Summary
 
-[.bit](https://did.id) is a [blockchain-based](https://www.nervos.org/), open source, decentralized cross-chain account system that provides a worldwide unique naming system with a .bit suffix that can be used in different scenarios, such as cryptocurrency transfer, domain name resolution, identity authentication, etc.
+[.bit](https://d.id) is a [blockchain-based](https://www.nervos.org/), open source, decentralized cross-chain account system that provides a worldwide unique naming system with a .bit suffix that can be used in different scenarios, such as cryptocurrency transfer, domain name resolution, identity authentication, etc.
 
 This .bit DID method specification describes a new DID method and how to do CRUD operations on .bit DID documents.
 
@@ -67,7 +67,7 @@ The following named CUSTOM records are defined for now:
 
 ### Create
 
-See [.bit doc](https://docs.did.id/) or [.bit official website](https://did.id) on how to register .bit names.
+See [.bit doc](https://docs.d.id/) or [.bit official website](https://d.id) on how to register .bit names.
 
 ### Read
 
@@ -218,11 +218,11 @@ The following CUSTOM records have to be set:
 
 ### Update
 
-See [related documents](https://docs.did.id/technical-details/data-container#record) on how to add/update CUSTOM records.
+See [related documents](https://docs.d.id/technical-details/data-container#record) on how to add/update CUSTOM records.
 
 ### Delete
 
-When an account expires and is not renewed for a long time, it will be reclaimed by the system. Once it is reclaimed, the DID information is essentially deleted and will remain deleted until a new user registers it. More details see [related documents](https://docs.did.id/technical-details/lifecycle#account-logical-status) to know the lifecycle of a .bit name.
+When an account expires and is not renewed for a long time, it will be reclaimed by the system. Once it is reclaimed, the DID information is essentially deleted and will remain deleted until a new user registers it. More details see [related documents](https://docs.d.id/technical-details/lifecycle#account-logical-status) to know the lifecycle of a .bit name.
 
 
 ## Privacy Considerations
@@ -266,10 +266,5 @@ To mitigate that risk, it is recommended to build a resolver and perform seconda
 ## References
 
 - https://www.w3.org/TR/did-core
-- https://github.com/eg-easy/grano-did
-- https://github.com/EG-easy/grano-did-client
-- https://github.com/EG-easy/grano-did-contract
-- https://github.com/EG-easy/grano-did-exporter
-- https://github.com/EG-easy/grano-did-node
-- https://github.com/EG-easy/grano-did-resolver
+
 
