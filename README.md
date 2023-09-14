@@ -90,6 +90,7 @@ The default verification method will always include the owner of the .bit name a
 
 | index | algorithm        | curve     | payload               | Scenario             |
 | ----- | ---------------- | --------- | --------------------- | -------------------- |
+| 02    | ECDSA            | secp256k1 | address               | CKB                  |
 | 03    | ECDSA            | secp256k1 | address               | EVM compatible chain |
 | 04    | ECDSA            | secp256k1 | hex format on address | TRON                 |
 | 05    | ECDSA ( [EIP712](https://eips.ethereum.org/EIPS/eip-712) ) | secp256k1 | address               | EVM compatible chain |
@@ -245,26 +246,12 @@ The Data and its historical data are stored in the blockchain. Users should unde
 
 ## Security considerations
 
-The .bit name's DID document contract is deployed on the Nervos BlockChain，all of the write operations MUST be signed by the private key which corresponds to the public key in the DID document.
-
-Document was protected by blockchain ledger security mechanism, so replay, eavesdropping, denial of service, man-in-the-middle，message insertion，deletion，modification attack are impossible, which can only be modified by one of the controllers who has related private key. All of the fields already been defined in document, user can insert incorrect implementation into document.
-
-We provide integrity protection and update authentication for all operations, which makes it impossible to insert, modify or delete message by attacker. Only controllers in document can modify document, which contain controller's public key.
-
-### Unsecure verifiable data registries
-
-There are a number of risks associated to the use of any unsecure verifiable data registries:
-
-- Resolver's blockchain nodes falling behind mainnet height.
-- The Nervos network became unstable causing resolvers to end up collecting incorrect data.
-- When some operations is in progress, the owner of the .bit name has changed.
-
-In such cases, the validity of transactions is not guaranteed, and denial-of-service attacks can take place, leading to dropped updates, or even the disappearance of the DIDs altogether.
-
-To mitigate that risk, it is recommended to build a resolver and perform secondary verification after a short period of time (5 minutes).
+1. .bit is based on the block chain ( [Nervos CKB](https://www.nervos.org/) ), which has a natural advantage in defending against DDOS attacks due to its technical characteristics.
+2. Eavesdropping attacks are not applicable since all exchanged data is public and does not include any personal information about the user.
 
 ## References
 
 - https://www.w3.org/TR/did-core
+- https://docs.d.id
 
 
